@@ -117,7 +117,7 @@ pamu2fcfg -u $USER | sudo tee -a /etc/Yubico/u2f_keys
 sleep 5
 echo " Nu ska allt vara klart!"
 EOF
-
+chmod +x /opt/regkey.sh
 echo "%#800223789 ALL=(ALL:ALL) ALL" >> /etc/sudoers
 echo "Defaults match_group_by_gid" >> /etc/sudoers
 
