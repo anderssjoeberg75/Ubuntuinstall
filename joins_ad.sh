@@ -16,7 +16,7 @@ read -p "Ange AD-administratör för anslutningen (t.ex. Administrator): " AD_US
 # SSSD-inställningar
 DOMAIN_LOWER=$(echo "$DOMAIN" | tr '[:upper:]' '[:lower:]')
 DOMAIN_UPPER=$(echo "$DOMAIN" | tr '[:lower:]' '[:upper:]')
-
+clear
 echo "--------------------------------------------------------"
 echo "Steg 1/4: Installerar beroenden..."
 
@@ -89,6 +89,12 @@ cp /etc/pam.d/gdm-password /etc/pam.d/gdm-password.bak
 cp /etc/pam.d/login /etc/pam.d/login.bak
 sudo mkdir -p /etc/Yubico
 
+cd /tmp 
+wget https://github.com/anderssjoeberg75/Ubuntuinstall/archive/refs/heads/main.zip
+unzip -o main.zip
+cp /tmp/Ubuntuinstall/login /etc/pam.d/
+cp /tmp/Ubuntuinstall/gdm-password /etc/pam.d/
+
 cat << EOF > /etc/udev/rules.d/90-yubikey-lock.rules
 ACTION=="remove", ATTRS{idVendor}=="1050", RUN+="/usr/local/bin/yubikey-lock.sh"
 EOF
@@ -117,7 +123,7 @@ echo "Datorn är nu ansluten till $DOMAIN_LOWER."
 echo "Användare kan nu logga in med sina AD-konton."
 echo " "
 echo "--------------------------------------------------------"
-echo "Datorn startar om själv när allt är klart.
+echo "Datorn startar om själv när allt är klart."
 sleep 5
 reboot
 
