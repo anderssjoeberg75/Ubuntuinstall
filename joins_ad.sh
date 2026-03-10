@@ -92,8 +92,8 @@ sudo mkdir -p /etc/Yubico
 cd /tmp 
 wget https://github.com/anderssjoeberg75/Ubuntuinstall/archive/refs/heads/main.zip
 unzip -o main.zip
-cp /tmp/Ubuntuinstall/login /etc/pam.d/
-cp /tmp/Ubuntuinstall/gdm-password /etc/pam.d/
+cp /tmp/Ubuntuinstall-main/login /etc/pam.d/
+cp /tmp/Ubuntuinstall-main/gdm-password /etc/pam.d/
 
 cat << EOF > /etc/udev/rules.d/90-yubikey-lock.rules
 ACTION=="remove", ATTRS{idVendor}=="1050", RUN+="/usr/local/bin/yubikey-lock.sh"
