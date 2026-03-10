@@ -106,12 +106,35 @@ SESSION=$(loginctl list-sessions | awk 'NR==2 {print $1}')
 loginctl lock-session "$SESSION"
 EOF
 
+cat << EOF > /opt/regkey.sh
+#!/bin/bash
+clear
+echo "Sätt i Yubikeyn som ska användas"
+sleep 3
+read "Ange användarnamn på användaren som ska logga in med : " USER
+echo -p "Om lampan blinkar på nyckeln rör vid den"
+pamu2fcfg -u $USER | sudo tee -a /etc/Yubico/u2f_keys
+sleep 5
+echo " Nu ska allt vara klart!"
+EOF
+
 echo "%#800223789 ALL=(ALL:ALL) ALL" >> /etc/sudoers
 echo "Defaults match_group_by_gid" >> /etc/sudoers
 
 echo "sudoers: files" >> /etc/nsswitch.conf
 
+clear
+
+echo "Sätt i Yubikeyn som ska användas"
+sleep 3
+read "Ange användarnamn på användaren som ska logga in med : " USER
+
+echo -p "Om lampan blinkar på nyckeln rör vid den"
+pamu2fcfg -u $USER | sudo tee -a /etc/Yubico/u2f_keys
+
+echo " Nu ska allt vara klart!"
 sleep 5
+
 clear
 echo "--------------------------------------------------------"
 echo "Steg 4/4: Aktiverar automatisk skapande av hemkatalog vid inloggning..."
