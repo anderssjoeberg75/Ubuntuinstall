@@ -8,7 +8,7 @@ cd /tmp/Ubuntuinstall-main
 
 chmod +x joins_ad.sh
 
-sudo ./joins_ad.se
+sudo ./joins_ad.sh
 
 
 Registrera nyckel ersätt username med användarnamnet 
